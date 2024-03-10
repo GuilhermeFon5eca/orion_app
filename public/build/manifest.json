@@ -1,0 +1,101 @@
+{
+  "lang/php_en.json": {
+    "file": "assets/php_en-96d957fc.js",
+    "isDynamicEntry": true,
+    "src": "lang/php_en.json"
+  },
+  "lang/php_pt_BR.json": {
+    "file": "assets/php_pt_BR-adaa1624.js",
+    "isDynamicEntry": true,
+    "src": "lang/php_pt_BR.json"
+  },
+  "resources/argon/css/argon-dashboard.css": {
+    "file": "assets/argon-dashboard-57635d4d.css",
+    "isEntry": true,
+    "src": "resources/argon/css/argon-dashboard.css"
+  },
+  "resources/argon/css/custom.css": {
+    "file": "assets/custom-818f4029.css",
+    "isEntry": true,
+    "src": "resources/argon/css/custom.css"
+  },
+  "resources/argon/css/nucleo-icons.css": {
+    "file": "assets/nucleo-icons-40f09e38.css",
+    "isEntry": true,
+    "src": "resources/argon/css/nucleo-icons.css"
+  },
+  "resources/argon/css/nucleo-svg.css": {
+    "file": "assets/nucleo-svg-89acc85b.css",
+    "isEntry": true,
+    "src": "resources/argon/css/nucleo-svg.css"
+  },
+  "resources/argon/fonts/nucleo-icons.eot": {
+    "file": "assets/nucleo-icons-f899f875.eot",
+    "src": "resources/argon/fonts/nucleo-icons.eot"
+  },
+  "resources/argon/fonts/nucleo-icons.svg": {
+    "file": "assets/nucleo-icons-be977573.svg",
+    "src": "resources/argon/fonts/nucleo-icons.svg"
+  },
+  "resources/argon/fonts/nucleo-icons.ttf": {
+    "file": "assets/nucleo-icons-655956cd.ttf",
+    "src": "resources/argon/fonts/nucleo-icons.ttf"
+  },
+  "resources/argon/fonts/nucleo-icons.woff": {
+    "file": "assets/nucleo-icons-daa807b2.woff",
+    "src": "resources/argon/fonts/nucleo-icons.woff"
+  },
+  "resources/argon/fonts/nucleo-icons.woff2": {
+    "file": "assets/nucleo-icons-3180896c.woff2",
+    "src": "resources/argon/fonts/nucleo-icons.woff2"
+  },
+  "resources/argon/js/argon-dashboard.js": {
+    "file": "assets/argon-dashboard-7933314e.js",
+    "isEntry": true,
+    "src": "resources/argon/js/argon-dashboard.js"
+  },
+  "resources/argon/js/core/bootstrap.min.js": {
+    "file": "assets/bootstrap.min-83207798.js",
+    "isEntry": true,
+    "src": "resources/argon/js/core/bootstrap.min.js"
+  },
+  "resources/argon/js/core/popper.min.js": {
+    "file": "assets/popper.min-2a7fa405.js",
+    "isEntry": true,
+    "src": "resources/argon/js/core/popper.min.js"
+  },
+  "resources/argon/js/plugins/chartjs.min.js": {
+    "file": "assets/chartjs.min-debe222f.js",
+    "isEntry": true,
+    "src": "resources/argon/js/plugins/chartjs.min.js"
+  },
+  "resources/argon/js/plugins/perfect-scrollbar.min.js": {
+    "file": "assets/perfect-scrollbar.min-62ac4145.js",
+    "isEntry": true,
+    "src": "resources/argon/js/plugins/perfect-scrollbar.min.js"
+  },
+  "resources/argon/js/plugins/smooth-scrollbar.min.js": {
+    "file": "assets/smooth-scrollbar.min-17ca8a99.js",
+    "isEntry": true,
+    "src": "resources/argon/js/plugins/smooth-scrollbar.min.js"
+  },
+  "resources/js/app.js": {
+    "dynamicImports": [
+      "lang/php_en.json",
+      "lang/php_pt_BR.json"
+    ],
+    "file": "assets/app-c5798466.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  },
+  "resources/js/main.js": {
+    "file": "assets/main-dbdff85e.js",
+    "isEntry": true,
+    "src": "resources/js/main.js"
+  },
+  "resources/sass/app.scss": {
+    "file": "assets/app-041e359a.css",
+    "isEntry": true,
+    "src": "resources/sass/app.scss"
+  }
+}
