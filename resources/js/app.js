@@ -71,6 +71,10 @@ app.component('paginate-component', Paginate);
 
 import Dashboard from './views/main/Dashboard.vue';
 app.component('dashboard-component', Dashboard);
+
+import ChatsComponent from './components/ChatsComponent.vue';
+app.component('chats', ChatsComponent);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -100,18 +104,18 @@ app.use(i18nVue, {
 app.config.globalProperties.$filters = {
   formatDateTime(d) {
     if(!d) return ''
-            d = d.split('T')
-            let data = d[0]
-            let tempo = d[1]
-            //formatando a data
-            data = data.split('-')
-            data = data[2]+'/'+data[1]+'/'+data[0]
+      d = d.split('T')
+      let data = d[0]
+      let tempo = d[1]
+      //formatando a data
+      data = data.split('-')
+      data = data[2]+'/'+data[1]+'/'+data[0]
 
-            // formatando o tempo
-            tempo = tempo.split('.')
-            tempo = tempo[0]
-            
-            return data +' '+tempo
+      // formatando o tempo
+      tempo = tempo.split('.')
+      tempo = tempo[0]
+      
+      return data +' '+tempo
   }
 }
 
