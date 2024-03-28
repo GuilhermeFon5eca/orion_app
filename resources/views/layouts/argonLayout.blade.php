@@ -32,7 +32,9 @@
     <body class="g-sidenav-show   bg-gray-100">
         <div id="app">
             <main>
-                @yield('content')
+                <div>                  
+                    @yield('content')
+                </div>
             </main>
         </div>
     </body>

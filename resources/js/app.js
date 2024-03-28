@@ -75,6 +75,8 @@ app.component('dashboard-component', Dashboard);
 import ChatsComponent from './components/ChatsComponent.vue';
 app.component('chats', ChatsComponent);
 
+import Crud from './views/crud/Crud.vue';
+app.component('crud-component', Crud);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

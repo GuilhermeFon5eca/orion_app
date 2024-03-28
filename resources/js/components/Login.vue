@@ -43,7 +43,7 @@
                                         Login
                                     </button>
 
-                                    <a class="btn btn-link" href="">
+                                    <a class="btn btn-link" href="password/reset">
                                         Esqueci a senha
                                     </a>
                                 </div>

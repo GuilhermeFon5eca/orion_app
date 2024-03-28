@@ -17,7 +17,9 @@ class AbstractRepository{
         $filters = explode(';',$filter);
         foreach($filters as $conditions){
             $c = explode(':',$conditions);
-            $this->model = $this->model->where($c[0],$c[1],$c[2]);
+            if(in_array($c[1], ['like','where', '=','>','<','>=','=<','=='])){
+                $this->model = $this->model->where($c[0],$c[1],$c[2]);
+            }
         }
     }
 

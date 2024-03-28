@@ -2,5 +2,6 @@
 
 @section('content')
     <dashboard-component :dashboard_data='{!! json_encode($dashboard_data??'') !!}'>
-    </dashboard-component>    
+        <crud-component></crud-component>
+    </dashboard-component>
 @endsection

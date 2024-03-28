@@ -19,11 +19,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->middleware('jwt.auth')->group(function(){
-    Route::apiResource('brand', 'App\Http\Controllers\BrandController');
+    Route::apiResource('brand', 'App\Http\Controllers\BrandController',['only' => [ 'index', 'show', 'update', 'destroy']]);
     Route::apiResource('car', 'App\Http\Controllers\CarController');
     Route::apiResource('client', 'App\Http\Controllers\ClientController');
     Route::apiResource('rent', 'App\Http\Controllers\RentController');
     Route::apiResource('type', 'App\Http\Controllers\TypeController');
+
+    Route::apiResource('config', 'App\Http\Controllers\ConfigController');
     
     //API AUTH
     Route::post('me', 'App\Http\Controllers\AuthController@me');
