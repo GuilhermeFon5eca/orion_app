@@ -5,8 +5,28 @@
                 <!-- Início do card de busca -->
                 <card-component title="Busca de Marcas">
                     <template v-slot:body-content>
-                        <div class="row">
-                            <div class="col mb-3">
+                        <div class="row"  v-if="input_fields">
+                            <template  v-for="field, inputName in input_fields" :key="inputName">     
+                                <template v-if="field.show_at_search">
+                                    <!-- <div class="col-4 mb-3">      -->
+                                        <input-container-component v-if="field.type === 'text' || field.type === 'number'" :class="field.class" :title="field.title" :id="inputName">
+                                            <input :type="field.type" class="form-control " :id="inputName" :v-model="searchParams.inputName" :placeholder="field.title">
+                                        </input-container-component>
+                                        <input-container-component v-else-if="field.type === 'textarea'"  :class="field.class" :title="field.title" :id="inputName">
+                                            <textarea  class="form-control" @input="setInputValue($event)" :name="inputName" :id="inputName" :placeholder="field.title"></textarea>
+                                        </input-container-component>
+                                        <input-container-component  v-else :title="field.title" :class="field.class" :id="inputName">
+                                            <select  class="form-select" :id="inputName" :v-model="searchParams.inputName" :placeholder="field.title">
+                                                <option value=""></option>
+                                                <option v-for="select_field, key in field.select_fields" :key="key" :value="select_field.value">
+                                                    {{ select_field.name }}
+                                                </option>
+                                            </select>
+                                        </input-container-component>
+                                    <!-- </div> -->
+                                </template>
+                            </template>
+                            <!-- <div class="col mb-3">
                                 <input-container-component title="ID" id="inputID" id-help="idHelp"
                                     text-help="Opcional. Informe o ID da Marca.">
                                     <input type="number" class="form-control" id="inputID" aria-describedby="idlHelp"
@@ -19,7 +39,7 @@
                                     <input type="text" class="form-control" id="inputNome" aria-describedby="nomeHelp"
                                         placeholder="Nome" v-model="searchParams.name">
                                 </input-container-component>
-                            </div>
+                            </div> -->
                         </div>
                     </template>
                     <template v-slot:footer-content>
@@ -71,7 +91,30 @@
                 <alert-component alertType="danger" :transactionDetails="transactionDetails" title="Falha"  v-if="transactionStatus == 'error'"></alert-component>
             </template>
             <template v-slot:modal-body-content>
-                <div class="form-group">
+                    <div class="row"  v-if="input_fields">
+                        <template  v-for="field, inputName in input_fields" :key="inputName">     
+                            <template v-if="field.show_at_insert">
+                                <input-container-component  v-if="field.type === 'select'" :class="field.class" :title="field.title" :id="inputName">
+                                    <select class="form-select" @change="setInputValue($event)" :name="inputName" :id="inputName" :placeholder="field.title">
+                                        <option value=""></option>
+                                        <option v-for="select_field, key in field.select_fields" :key="key" :value="select_field.value">
+                                            {{ select_field.name }}
+                                        </option>
+                                    </select>
+                                </input-container-component>
+                                <input-container-component v-else-if="field.type === 'textarea'" :class="field.class" :title="field.title" :id="inputName">
+                                    <textarea  class="form-control" @input="setInputValue($event)" :name="inputName" :id="inputName" :placeholder="field.title"></textarea>
+                                </input-container-component>
+                                <input-container-component v-else-if="field.type === 'file'" :class="field.class" :title="field.title" :id="inputName">
+                                    <input :type="field.type" class="form-control" @change="loadImage($event)" :name="inputName" :id="inputName" :placeholder="field.title">
+                                </input-container-component>
+                                <input-container-component v-else :class="field.class" :title="field.title" :id="inputName">
+                                    <input :type="field.type" class="form-control" @input="setInputValue($event)" :name="inputName" :id="inputName" :placeholder="field.title">
+                                </input-container-component>
+                            </template>
+                        </template>
+                    </div>
+                <!-- <div class="form-group">
                     <input-container-component title="Nome da Marca" id="newName" id-help="newNameHelp" text-help="Informe o nome de uma marca">
                         <input type="text" class="form-control" id="newName" aria-describedby="newNameHelp" placeholder="Ex: Hynday" v-model="nameBrand">
                     </input-container-component>
@@ -80,7 +123,7 @@
                     <input-container-component title="Imagem" id="newImage" id-help="newImageHelp" text-help="Selecione uma imagem PNG">
                         <input type="file" class="form-control" id="newImage" aria-describedby="newImageHelp" placeholder="Selecione uma imagem" @change="loadImage($event)">
                     </input-container-component>
-                </div>
+                </div> -->
             </template>
             <template v-slot:modal-footer-content>                
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -164,7 +207,7 @@
     export default {
         data(){
             return {
-                baseUrl: 'http://127.0.0.1:8000/api/v1/brand',
+                baseUrl: this.$globalData.baseUrl+'/api/v1/config',
                 urlPagination: '',
                 urlFilter: '',
                 nameBrand: '',
@@ -172,7 +215,8 @@
                 transactionStatus: '',
                 transactionDetails: {},
                 brands: {data:[]},
-                searchParams:{id: '', name: ''}
+                searchParams:{id: '', name: ''},
+                frmData: {}
             }
         },
         methods:{
@@ -260,14 +304,33 @@
                     })
             },
             loadImage(e){
-                this.fileImage = e.target.files;
+                this.fileImage[e.target.name] = e.target.files;
             },
-            save(){                
-
+            setInputValue(e){
+                this.frmData[e.target.name] = e.target.value;
+            },
+            submit: function () {
+                const formData = new FormData(this.$refs['form']); // reference to form element
+                const data = {}; // need to convert it before using not with XMLHttpRequest
+                console.log(formData);
+                for (let [key, val] of formData.entries()) {
+                    console.log(key, val);
+                    Object.assign(data, { [key]: val })
+                }
+                console.log(data);
+                // axios.post('https://jsonplaceholder.typicode.com/posts', data)
+                //     .then(res => console.log(res.request.response))
+            },
+            save(){
                 let formData = new FormData();
-                formData.append('name', this.nameBrand);
-                formData.append('image', this.fileImage[0]);
-
+                for (var key in this.frmData) {
+                    formData.append(key, this.frmData[key]);
+                }
+                for (var key in this.fileImage) {
+                    formData.append(key, this.fileImage[key][0]);
+                }
+                // formData.append('image', this.fileImage[0]);
+                // console.log(formData);
                 let config  = {
                     headers:{
                         'Content-Type': 'multipart/form-data',
@@ -275,6 +338,7 @@
                 }
                 axios.post(this.baseUrl, formData, config)
                     .then(response =>{
+                        console.log(response);
                         this.transactionStatus = 'success'
                         this.transactionDetails = {
                             message: "ID do registro: "+response.data.id 
@@ -282,6 +346,7 @@
                         this.loadList();
                     })
                     .catch(errors =>{
+                        console.log(errors);
                         this.transactionStatus = 'error'
                         this.transactionDetails ={
                             message: errors.response.data.message,
@@ -292,6 +357,7 @@
         },
         mounted(){
             this.loadList();
-        }
+        },
+        props: ['input_fields']
     }
 </script>

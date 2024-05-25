@@ -62,10 +62,11 @@ function setAttributes(el, options) {
 
 // adding on inputs attributes for calling the focused and defocused functions
 if (document.querySelectorAll('.input-group').length != 0) {
+  console.log("// onfocus removed", "onfocusout removed");
   var allInputs = document.querySelectorAll('input.form-control');
   allInputs.forEach(el => setAttributes(el, {
-    "onfocus": "focused(this)",
-    "onfocusout": "defocused(this)"
+    // "onfocus": "focused(this)",
+    // "onfocusout": "defocused(this)"
   }));
 }
 

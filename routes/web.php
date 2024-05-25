@@ -27,9 +27,12 @@ Auth::routes(['verify' => true]);
 Route::middleware('verified')->group(function () {
        Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
     Route::get('/brands', function(){ return view('app.brands'); })->name('brands')->middleware('auth');
-    Route::get('/admin/config', function(){ 
-       return view('app.admin.config'); 
-    })->name('admin/config')->middleware('auth');
+
+    Route::get('/admin/config', [App\Http\Controllers\ConfigController::class, 'mainView'])->middleware('auth');
+
+    // Route::get('/admin/config', function(){ 
+    //    return view('app.admin.config');
+    // })->name('admin/config')->middleware('auth');
 
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

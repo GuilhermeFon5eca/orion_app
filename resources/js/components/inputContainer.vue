@@ -8,6 +8,11 @@
 
 <script>
     export default {
+        methods:{
+            vow(){
+                console.log(11111);
+            },
+        },
         props:['id', 'title', 'idHelp', 'textHelp']
     }
 </script>

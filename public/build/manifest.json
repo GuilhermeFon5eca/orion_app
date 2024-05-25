@@ -1,9 +1,4 @@
 {
-  "lang/es.json": {
-    "file": "assets/es-5ab37836.js",
-    "isDynamicEntry": true,
-    "src": "lang/es.json"
-  },
   "lang/php_en.json": {
     "file": "assets/php_en-4a8cfa91.js",
     "isDynamicEntry": true,
@@ -86,11 +81,10 @@
   },
   "resources/js/app.js": {
     "dynamicImports": [
-      "lang/es.json",
       "lang/php_en.json",
       "lang/php_pt_BR.json"
     ],
-    "file": "assets/app-60dad446.js",
+    "file": "assets/app-295e1f47.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },

@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model; 
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class AbstractRepository{
     public function __construct(Model $model){
@@ -32,5 +34,9 @@ class AbstractRepository{
     }
     public function getResultPaginated(int $numberOfRegistries){
         return $this->model->paginate($numberOfRegistries);
+    }
+    public function getTableColumns($table){
+        // return DB::select('describe '.$table);
+        return DB::getSchemaBuilder()->getColumnListing($table);
     }
 }

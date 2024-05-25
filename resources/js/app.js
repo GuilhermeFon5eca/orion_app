@@ -121,5 +121,9 @@ app.config.globalProperties.$filters = {
   }
 }
 
+app.config.globalProperties.$globalData ={
+  baseUrl: import.meta.env.VITE_APP_URL ?? 'no_url',
+};
+
 
 app.mount('#app');

@@ -47,7 +47,6 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate($this->brand->rules(), $this->brand->feedback());
         
         //Image store

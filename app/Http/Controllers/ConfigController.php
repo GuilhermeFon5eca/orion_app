@@ -16,8 +16,7 @@ class ConfigController extends Controller
     /**
      * Display a listing of the resource. type
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request){
         $configRepository = New ConfigRepository($this->config);
 
         if($request->has('params_type')){
@@ -36,10 +35,19 @@ class ConfigController extends Controller
 
         $configs = $configRepository->getResultPaginated(3);
 
+
         if($configs === null){
             return response()->json(['erro' => 'Nenhum registro encontrado'],404);
         }
+        $configs['inputFields']  = $this->config->inputFields();
         return response()->json($configs,200);
+    }
+    
+    public function mainView(){
+        $data = [
+            'inputFields' => $this->config->inputFields(),
+        ];
+        return view('app.admin.config', $data);
     }
 
     /**
@@ -47,17 +55,18 @@ class ConfigController extends Controller
      */
     public function store(Request $request)
     {
-
-        $request->validate($this->config->rules(), $this->config->feedback());
-        
+        // dd($request->all());
+        $request->validate($this->config->rules(), $this->config->feedback());   
+        $data = $request->all();     
         //Image store
-        $image = $request->file('image');
-        $image_urn = $image->store('files','public');
-
-        $config = $this->config->create([
-            'name' => $request->name,
-            'image' => $image_urn,
-        ]);
+        $image_urn = null;
+        if($request->file('config_logo')){
+            $image = $request->file('config_logo');
+            $image_urn = $image->store('files','public');            
+            $data['config_logo'] =$image_urn;
+        }       
+        
+        $config = $this->config->create($data);
 
         return response()->json($config,201);
     }
